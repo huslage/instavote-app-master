@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  voting-app:
+    image: instavote/vote
+    build: ./vote
+    ports:
+      - "5000:80"
+
+  redis:
+    image: redis:alpine
+    ports: ["6379"]
+
+  worker:
+    image: instavote/worker
+    build: ./worker
+
+  db:
+    image: postgres:9.4
+
+  result-app:
+    image: instavote/result
+    build: ./result
+    ports:
+      - "5001:80"
